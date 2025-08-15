@@ -830,6 +830,9 @@ require("lazy").setup({
 		"catppuccin/nvim",
 		priority = 1000,
 		config = function()
+			require("catppuccin").setup({
+				transparent_background = true, -- removes all background colors
+			})
 			-- Load the colorscheme here.
 			-- Like many other themes, this one has different styles, and you could load
 			-- any other, such as 'latte', 'frappe', 'macchiato', or 'mocha'.

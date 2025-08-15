@@ -31,7 +31,7 @@
     # pkgs.hello
     (config.lib.nixGL.wrap pkgs.ghostty)
 
-    discord
+    (config.lib.nixGL.wrap pkgs.discord)
     git
     htop
     go
@@ -143,7 +143,7 @@
       window-padding-x = 10;
       window-padding-y = 10;
       font-size = 10;
-      background-opacity = 0.8;
+      background-opacity = 0.9;
     };
   };
 
@@ -352,6 +352,25 @@
         font = "Noto Sans Mono 10";
         frame_width = 4;
         gap_size = 10;
+      };
+    };
+  };
+
+  wayland.windowManager.hyprland = {
+    enable = true;
+    extraConfig = builtins.readFile ./files/hypr/hyprland.conf;
+  };
+
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      preload = [
+        "~/Pictures/wallpaper.jpg"
+        "~/Pictures/wallpaper2.jpg"
+      ];
+
+      wallpaper = {
+        "DP-4" = "~/Pictures/wallpaper2.jpg";
       };
     };
   };
