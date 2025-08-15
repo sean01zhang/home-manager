@@ -42,6 +42,7 @@
     ripgrep
     rofi-wayland
     fastfetch
+    gnome-calendar
 
     waybar
     dunst
@@ -75,7 +76,7 @@
     #   org.gradle.daemon.idletimeout=3600000
     # '';
 
-
+    ".config/hypr/hyprland.conf".source = ./files/hypr/hyprland.conf;
   };
 
   # Home Manager can also manage your environment variables through
@@ -342,6 +343,21 @@
     style = builtins.readFile ./files/waybar/style.css;
   };
 
+  systemd.user.services.waybar = {
+    Unit = {
+      Description = "Waybar service";
+    };
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
+    Service = {
+      Type = "simple";
+      Restart = "on-failure";
+      RestartSec = 5;
+      ExecStart = "${pkgs.waybar}/bin/waybar";
+    };
+  };
+
   services.dunst = {
     enable = true;
     settings = {
@@ -356,11 +372,6 @@
     };
   };
 
-  wayland.windowManager.hyprland = {
-    enable = true;
-    extraConfig = builtins.readFile ./files/hypr/hyprland.conf;
-  };
-
   services.hyprpaper = {
     enable = true;
     settings = {
@@ -369,9 +380,9 @@
         "~/Pictures/wallpaper2.jpg"
       ];
 
-      wallpaper = {
-        "DP-4" = "~/Pictures/wallpaper2.jpg";
-      };
+      wallpaper = [
+        "DP-4,~/Pictures/wallpaper2.jpg"
+      ];
     };
   };
 
