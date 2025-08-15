@@ -1,0 +1,139 @@
+* {
+    /* `otf-font-awesome` is required to be installed for icons */
+    /* if your bar is in serif, something is wrong.*/
+    font-family:  "Noto Sans Mono", FontAwesome , serif; 
+    font-weight: 600;
+    font-size: 14px;
+}
+
+
+/*
+* =====================
+*
+* Main Bar
+*
+* =====================
+*/
+
+window#waybar {
+    background: none;
+    border: none;
+}
+
+/*
+* =====================
+*
+* Waybar Left Modules
+*
+* =====================
+*/
+
+
+.modules-left {
+    background: none;
+    border-radius: 24px;
+    padding: 2px 12px 2px 2px; /* padding: top right bottom left */
+}
+
+#workspaces {
+    border: 2px solid rgba(0, 0, 0, 0.5);
+    padding: 0px 2px;
+    margin: 0px 0px;
+    border-radius: 24px;
+}
+
+#workspaces button {
+    margin: 0px 2px;
+    padding: 0px 0px;
+    border-radius: 24px;
+    transition-property: all;
+    transition-duration: .2s;
+    background: none;
+}
+
+#workspaces button.active {
+    margin: 0px -2px;
+    padding: 0px 4px;
+    background: #f1c7ff;
+}
+
+#workspaces button.urgent {
+    background: #f38ba8;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#workspaces button:hover {
+    background: inherit;
+}
+
+#window {
+    background: none;
+    padding: 0px 12px;
+}
+
+window#waybar.empty #window {
+    padding: 0px;
+}
+
+#submap {
+    background: #fab387; 
+    padding: 0px 2px;
+    border-radius: 0px;
+}
+
+/*
+* =====================
+*
+* Waybar Center Modules
+*
+* =====================
+*/
+
+.modules-center {
+    background: none;
+    padding: 0px 2px;
+    border-radius: 24px;
+}
+
+#clock {
+    /* border: 1px solid black; */
+}
+
+/*
+* =====================
+*
+* Waybar Right Modules
+*
+* =====================
+*/
+
+.modules-right {
+    padding: 0px 8px;
+    border-radius: 24px;
+    background: none;
+}
+
+#cpu, #temperature, #memory, #mpris {
+    padding: 0px 12px;
+}
+
+/* Visually identify these two are related */
+#cpu {
+    padding-right: 4px;
+}
+#temperature {
+    padding-left: 0px;
+}
+
+#tray {
+    padding: 0px 12px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #eb4d4b;
+}
