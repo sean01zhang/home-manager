@@ -9,15 +9,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixgl.url = "github:nix-community/nixGL/pull/195/head";
-    zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     catppuccin.url = "github:catppuccin/nix";
   };
 
   outputs =
-    { nixpkgs, home-manager, nixgl, zen-browser, catppuccin, ... }:
+    { nixpkgs, home-manager, nixgl, catppuccin, ... }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -31,14 +27,14 @@
       };
     in
     {
-      homeConfigurations."naesna" = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations."seanspc" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
         modules = [
           "${home-manager}/modules/misc/nixgl.nix"
-          ./home.nix 
+          ./hosts/seanspc/default.nix
           catppuccin.homeModules.catppuccin
         ];
 
@@ -46,8 +42,16 @@
         # to pass through arguments to home.nix
         extraSpecialArgs = {
           inherit nixgl;
-          inherit zen-browser;
         };
+      };
+
+      homeConfigurations."vw" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+
+        modules = [
+          ./hosts/vw/default.nix
+          catppuccin.homeModules.catppuccin
+        ];
       };
     };
 }

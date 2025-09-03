@@ -2,19 +2,12 @@
 
 {
 
+  imports = [ ../common.nix ];
+
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "naesna";
   home.homeDirectory = "/home/naesna";
-
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
-  # You should not change this value, even if you update Home Manager. If you do
-  # want to update the value, then make sure to first check the Home Manager
-  # release notes.
-  home.stateVersion = "25.05"; # Please read the comment before changing.
 
   targets.genericLinux.enable = true;
   
@@ -101,40 +94,13 @@
     NIXGL_REQUIRE = "1"; # Enable NixGL
   };
 
-  home.sessionPath = [
-    "$HOME/.nix-profile/bin"
-  ];
+  # home.sessionPath = [
+  #   "$HOME/.nix-profile/bin"
+  # ];
 
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-
-  programs.fish = {
-    enable = true;
-    shellAliases = {
-      "1"="cd ..";
-      "2"="cd ../..";
-      "3"="cd ../../../";
-      "dotfiles"="cd ~/git/dotfiles";
-      "g"="git";
-      "m12"="hyprctl keyword monitor \"DP-4,preferred,auto,1.2\"";
-      "m10"="hyprctl keyword monitor \"DP-4,preferred,auto,1.0\"";
-    };
-  };
-
-  programs.fzf = {
-    enable = true;
-    enableFishIntegration = true;
-  
-    defaultCommand = "rg --files";
-
-    defaultOptions = [
-      "--height 60%"
-      "--tmux center"
-      "--layout reverse"
-      "--border"
-    ];
-  };
 
   programs.ghostty = {
     enable = true;
@@ -239,24 +205,6 @@
     };
   };
 
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    extraLuaConfig = builtins.readFile ./files/nvim/init.lua;
-  };
-
-  programs.tmux = {
-    enable = true;
-    keyMode = "vi";
-    shell = "${pkgs.fish}/bin/fish";
-    mouse = true;
-    escapeTime = 0;
-    extraConfig = builtins.readFile ./files/tmux/tmux.conf;
-    clock24 = true;
-  };
-  catppuccin.tmux.enable = true;
-
-
   programs.waybar = {
     enable = true;
     settings = {
@@ -340,7 +288,7 @@
         };
       };
     };
-    style = builtins.readFile ./files/waybar/style.css;
+    style = builtins.readFile ../files/waybar/style.css;
   };
 
   systemd.user.services.waybar = {
