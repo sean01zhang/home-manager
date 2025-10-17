@@ -25,6 +25,12 @@
           allowUnfree = true; # Allow unfree packages
         };
       };
+      pkgs-mac = import nixpkgs {
+	system = "aarch64-darwin";
+        config = {
+          allowUnfree = true;
+        };
+      };
     in
     {
       homeConfigurations."seanspc" = home-manager.lib.homeManagerConfiguration {
@@ -50,6 +56,15 @@
 
         modules = [
           ./hosts/vw/default.nix
+          catppuccin.homeModules.catppuccin
+        ];
+      };
+
+      homeConfigurations."mbp" = home-manager.lib.homeManagerConfiguration {
+        pkgs = pkgs-mac;
+
+        modules = [
+          ./hosts/mbp/default.nix
           catppuccin.homeModules.catppuccin
         ];
       };

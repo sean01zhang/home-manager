@@ -2,15 +2,20 @@
 
 ## Usage
 
-There are two machines using this configuration.
+There are `N` machines using this configuration.
 
-- seanspc
-- vw
+```c
+enum Machines {
+    seanspc = 0,
+    vw,
+    mbp,
+    N
+}
+
+```
 
 Example:
 
 ```
 nix run home-manager -- switch --flake .#seanspc
 ```
-
-
